@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Mubashir — Creative Web Developer & Performance Marketer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0f;
+    --bg-alt:#121218;
+    --card:#16161e;
+    --border:#232330;
+    --text:#eeeef2;
+    --text-dim:#9494a3;
+    --text-faint:#5f5f6e;
+    --accent1:#6366f1;
+    --accent2:#22d3ee;
+    --gradient: linear-gradient(120deg, var(--accent1), var(--accent2));
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+
+  /* Background glow */
+  .glow{
+    position:fixed;
+    top:-20%;
+    left:50%;
+    transform:translateX(-50%);
+    width:900px;
+    height:900px;
+    background:radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(34,211,238,0.06) 40%, transparent 70%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* Nav */
+  nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    background:rgba(10,10,15,0.7);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:68px;
+  }
+  .logo{font-weight:700;font-size:18px;letter-spacing:-0.02em;}
+  .logo span{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .nav-links{display:flex;gap:32px;list-style:none;}
+  .nav-links a{
+    font-size:14px;
+    color:var(--text-dim);
+    font-weight:500;
+    transition:color .2s ease;
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{
+    font-size:13px;
+    font-weight:600;
+    padding:9px 18px;
+    border-radius:100px;
+    background:var(--gradient);
+    color:#08080c;
+  }
+
+  /* Hero */
+  header.hero{
+    position:relative;
+    z-index:1;
+    padding:180px 0 120px;
+    text-align:center;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color:var(--text-dim);
+    border:1px solid var(--border);
+    padding:6px 16px;
+    border-radius:100px;
+    margin-bottom:28px;
+    background:var(--bg-alt);
+  }
+  .eyebrow .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#4ade80;
+    box-shadow:0 0 8px #4ade80;
+  }
+  .hero h1{
+    font-size:clamp(40px, 7vw, 76px);
+    font-weight:700;
+    letter-spacing:-0.03em;
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  .hero h1 .accent{
+    background:var(--gradient);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.tagline{
+    max-width:600px;
+    margin:0 auto 40px;
+    font-size:18px;
+    color:var(--text-dim);
+  }
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .btn{
+    padding:14px 28px;
+    border-radius:100px;
+    font-size:15px;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:var(--gradient);
+    color:#08080c;
+  }
+  .btn-secondary{
+    background:var(--card);
+    border:1px solid var(--border);
+    color:var(--text);
+  }
+  .btn-secondary:hover{border-color:var(--accent1);}
+
+  .hero-meta{
+    margin-top:64px;
+    display:flex;
+    justify-content:center;
+    gap:48px;
+    flex-wrap:wrap;
+    color:var(--text-faint);
+    font-size:13px;
+    letter-spacing:0.02em;
+  }
+  .hero-meta strong{
+    display:block;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:26px;
+    color:var(--text);
+    font-weight:600;
+  }
+
+  /* Section shared */
+  section{
+    position:relative;
+    z-index:1;
+    padding:110px 0;
+    border-top:1px solid var(--border);
+  }
+  .section-tag{
+    font-size:13px;
+    font-weight:600;
+    color:var(--accent2);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .section-title{
+    font-size:clamp(28px, 4vw, 42px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin-bottom:20px;
+    max-width:640px;
+  }
+  .section-desc{
+    color:var(--text-dim);
+    font-size:16px;
+    max-width:600px;
+    margin-bottom:56px;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* About */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:start;
+  }
+  .about-grid p{color:var(--text-dim);font-size:16px;margin-bottom:16px;}
+  .about-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:28px;
+  }
+  .about-card h3{font-size:14px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:18px;}
+  .about-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+    font-size:14px;
+  }
+  .about-row:last-child{border-bottom:none;}
+  .about-row span:first-child{color:var(--text-faint);}
+  .about-row span:last-child{color:var(--text);font-weight:500;text-align:right;}
+
+  /* Skills */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .skill-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:28px;
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .skill-card:hover{
+    border-color:var(--accent1);
+    transform:translateY(-4px);
+  }
+  .skill-card .icon{
+    width:42px;height:42px;
+    border-radius:12px;
+    background:var(--gradient);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
+    margin-bottom:18px;
+    color:#08080c;
+    font-weight:700;
+  }
+  .skill-card h3{font-size:17px;margin-bottom:14px;}
+  .tag-list{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{
+    font-size:12.5px;
+    padding:6px 12px;
+    border-radius:100px;
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+  }
+
+  /* Experience timeline */
+  .timeline{
+    position:relative;
+    padding-left:32px;
+  }
+  .timeline::before{
+    content:'';
+    position:absolute;
+    left:5px;top:6px;bottom:6px;
+    width:2px;
+    background:linear-gradient(var(--accent1), var(--accent2));
+    opacity:0.35;
+  }
+  .tl-item{
+    position:relative;
+    padding-bottom:48px;
+  }
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:-32px;top:4px;
+    width:12px;height:12px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--accent2);
+  }
+  .tl-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:6px;
+  }
+  .tl-head h3{font-size:19px;}
+  .tl-head .period{
+    font-size:13px;
+    color:var(--text-faint);
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .tl-role{
+    font-size:14px;
+    color:var(--accent2);
+    font-weight:600;
+    margin-bottom:12px;
+  }
+  .tl-item ul{
+    list-style:none;
+    color:var(--text-dim);
+    font-size:14.5px;
+  }
+  .tl-item li{
+    position:relative;
+    padding-left:18px;
+    margin-bottom:8px;
+  }
+  .tl-item li::before{
+    content:'';
+    position:absolute;
+    left:0;top:9px;
+    width:5px;height:5px;
+    border-radius:50%;
+    background:var(--text-faint);
+  }
+
+  /* Education / Certs */
+  .edu-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .edu-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:28px;
+  }
+  .edu-card .section-tag{margin-bottom:10px;}
+  .edu-card h3{font-size:18px;margin-bottom:6px;}
+  .edu-card p{color:var(--text-dim);font-size:14px;}
+
+  /* Contact */
+  .contact-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:64px 48px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-box::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at 50% 0%, rgba(99,102,241,0.15), transparent 60%);
+    pointer-events:none;
+  }
+  .contact-box h2{
+    font-size:clamp(28px,4vw,40px);
+    margin-bottom:16px;
+    position:relative;
+  }
+  .contact-box p{
+    color:var(--text-dim);
+    max-width:480px;
+    margin:0 auto 36px;
+    position:relative;
+  }
+  .contact-links{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+    position:relative;
+  }
+  .contact-pill{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    padding:12px 20px;
+    border-radius:100px;
+    font-size:14px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .contact-pill:hover{border-color:var(--accent2);transform:translateY(-2px);}
+
+  footer{
+    position:relative;
+    z-index:1;
+    padding:36px 0;
+    text-align:center;
+    color:var(--text-faint);
+    font-size:13px;
+    border-top:1px solid var(--border);
+  }
+
+  @media(max-width:760px){
+    .about-grid, .skills-grid, .edu-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">Muhammad <span>Mubashir</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Contact me</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> Open to new brand projects</div>
+    <h1>Building brands<br>from <span class="accent">pixel to purchase.</span></h1>
+    <p class="tagline">
+      Creative Web Developer and Performance Marketer based in Kerala, India — I design, build, and grow
+      service and product brands end to end, from WooCommerce storefronts to full-funnel ad campaigns.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#experience">See my work &rarr;</a>
+      <a class="btn btn-secondary" href="#contact">Get in touch</a>
+    </div>
+    <div class="hero-meta">
+      <div><strong>4+</strong>years experience</div>
+      <div><strong>2</strong>brands built end-to-end</div>
+      <div><strong>3</strong>core disciplines</div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-tag">About</div>
+      <h2 class="section-title">A hybrid of developer and marketer.</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div>
+        <p>
+          I'm a Creative Web Developer and Performance Marketer with hands-on experience building service-based
+          and product-based brands. I'm skilled in WordPress and WooCommerce development, paid advertising,
+          conversion tracking, and full-funnel marketing implementation.
+        </p>
+        <p>
+          I've launched and scaled eCommerce operations through structured branding and data-driven campaign
+          execution — handling everything from visual identity and packaging to the ad accounts that drive sales.
+        </p>
+      </div>
+      <div class="about-card">
+        <h3>Quick facts</h3>
+        <div class="about-row"><span>Location</span><span>Kerala, India</span></div>
+        <div class="about-row"><span>Role</span><span>Creative Lead / Brand Developer</span></div>
+        <div class="about-row"><span>Focus</span><span>Web + Performance Marketing</span></div>
+        <div class="about-row"><span>Education</span><span>BCA, Kannur University</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-tag">Skills</div>
+      <h2 class="section-title">What I bring to a brand.</h2>
+      <p class="section-desc">Three disciplines that usually live in separate hires — I run all three myself.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="icon">&lt;/&gt;</div>
+        <h3>Web development &amp; eCommerce</h3>
+        <div class="tag-list">
+          <span class="tag">WordPress</span>
+          <span class="tag">WooCommerce</span>
+          <span class="tag">Shopify</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="icon">&#8599;</div>
+        <h3>Performance marketing &amp; analytics</h3>
+        <div class="tag-list">
+          <span class="tag">Meta Ads Manager</span>
+          <span class="tag">Google Ads</span>
+          <span class="tag">Google Analytics</span>
+          <span class="tag">Tag Manager</span>
+          <span class="tag">Search Console</span>
+          <span class="tag">Merchant Center</span>
+          <span class="tag">Meta Pixel</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="icon">&#9998;</div>
+        <h3>Branding &amp; content execution</h3>
+        <div class="tag-list">
+          <span class="tag">Visual Identity</span>
+          <span class="tag">Packaging Design</span>
+          <span class="tag">Product Photography</span>
+          <span class="tag">Ad Creative</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-tag">Experience</div>
+      <h2 class="section-title">Where I've built things.</h2>
+    </div>
+    <div class="timeline reveal">
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>Sew Much Lewks</h3>
+          <span class="period">Nov 2025 &mdash; Present</span>
+        </div>
+        <div class="tl-role">Creative Lead / Brand Developer</div>
+        <ul>
+          <li>Built the complete brand identity — logo, packaging design, and overall visual direction.</li>
+          <li>Designed and launched the WooCommerce store with structured listings and checkout integration.</li>
+          <li>Set up SEO foundations plus Google Search Console and Merchant Center.</li>
+          <li>Established the full marketing stack: Google Ads, Tag Manager, Analytics, Meta Pixel.</li>
+          <li>Directed product photoshoots and ran Meta Ads campaigns for consistent online sales.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>Kwell-co</h3>
+          <span class="period">Jun 2024 &mdash; Sep 2025</span>
+        </div>
+        <div class="tl-role">Web Designer &amp; Developer</div>
+        <ul>
+          <li>Designed and developed responsive WordPress and Shopify sites with custom HTML/CSS.</li>
+          <li>Managed and optimized Meta Ads campaigns for lead generation and sales growth.</li>
+          <li>Implemented analytics and tracking with Google Analytics and Tag Manager.</li>
+          <li>Delivered branding solutions — logos, visual identity, marketing creatives — for multiple clients.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>TecSwan Marketing Agency</h3>
+          <span class="period">Sep 2023 &mdash; May 2024</span>
+        </div>
+        <div class="tl-role">Digital Marketing Intern</div>
+        <ul>
+          <li>Assisted with SEO — keyword research, on-page optimization, technical improvements.</li>
+          <li>Managed Meta Ads campaigns focused on lead generation and engagement.</li>
+          <li>Monitored traffic and campaign performance with Google Analytics.</li>
+          <li>Generated performance reports and supported social media scheduling.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>Emigo Networks</h3>
+          <span class="period">Jan 2022 &mdash; Nov 2022</span>
+        </div>
+        <div class="tl-role">IT Infrastructure &amp; Cloud Intern</div>
+        <ul>
+          <li>Configured and maintained internal network infrastructure for system stability.</li>
+          <li>Provided desktop administration support and troubleshooting.</li>
+          <li>Supported AWS cloud environment setup and basic infrastructure management.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-tag">Education &amp; certifications</div>
+      <h2 class="section-title">Foundations.</h2>
+    </div>
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="section-tag">Degree</div>
+        <h3>Bachelor of Computer Applications (BCA)</h3>
+        <p>Kannur University</p>
+      </div>
+      <div class="edu-card">
+        <div class="section-tag">Certification</div>
+        <h3>Dive Deeper into GA4 Data and Reports</h3>
+        <p>Google Skillshop &middot; 2026</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <h2>Let's build your next brand.</h2>
+      <p>Web development, paid media, or a full brand launch — I'm currently open to new projects.</p>
+      <div class="contact-links">
+        <a class="contact-pill" href="mailto:mubashirbachu112@gmail.com">&#9993; mubashirbachu112@gmail.com</a>
+        <a class="contact-pill" href="tel:+919207698088">&#9742; +91 92076 98088</a>
+        <a class="contact-pill" href="https://www.linkedin.com/in/Muhammad-Mubashir-ak" target="_blank" rel="noopener">in LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Muhammad Mubashir &middot; Kerala, India
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
