@@ -26,6 +26,18 @@ def order_tracker():
         total = total + order["price"]
     print(f"total sales = {total}")
 
+def view_orders():
+    try:
+        with open("toolbox.json", "r") as file:
+            orders = json.load(file)
+    except FileNotFoundError:
+        orders = []
+        if len(orders) == 0:
+            print("no orders yet")
+        else :
+            for order in orders:
+                print(f"{order['customer']} bought for {order['item']} for {order['price']} ")
+    
 
 def expense_tracker():
     try:
@@ -57,7 +69,7 @@ def password_generator():
     print(f"your password: {password}")    
 
 while True:
-    print("\n 1.Order 2.expense 3.password 4.quit")
+    print("\n 1.Order 2.expense 3.password 4.view 5.quit")
     choice = input("pick one")
     if choice == "1":
         order_tracker()
@@ -66,6 +78,8 @@ while True:
     elif choice == "3":
         password_generator()
     elif choice == "4":
+        view_orders()
+    elif choice == "5":
         break
     else:
         print("not a valid option")
