@@ -1,0 +1,3 @@
+customer : baseer
+bag x1.0 x650 = 650.0
+grand_total: 650.0
